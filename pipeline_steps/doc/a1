@@ -1,0 +1,15 @@
+If the extraction process from your OLTP database (Postgres in this case) causes performance issues or slows down the database, there are several strategies you can employ to mitigate this:
+
+Off-Peak Hours: Schedule your extraction job to run during off-peak hours when the OLTP system experiences lower usage and fewer transactions. This can help reduce the impact on OLTP performance during business-critical hours.
+
+Incremental Extraction: Implement incremental extraction techniques to only extract data that has been modified since the last extraction process. This reduces the amount of data that needs to be processed each time the job runs, minimizing the impact on OLTP performance.
+
+Batch Processing: Instead of extracting data in real-time, consider batching data extraction into smaller chunks. This allows the OLTP system to handle smaller loads over time rather than processing a large volume of data all at once, thereby reducing the impact on performance.
+
+Query Optimization: Optimize your extraction queries to minimize the load on the OLTP database. This includes using appropriate indexes, optimizing SQL queries, and avoiding resource-intensive operations whenever possible.
+
+Parallel Processing: If feasible, parallelize the extraction process by splitting the workload across multiple instances or threads. This can help distribute the load and reduce the overall execution time, thereby mitigating the impact on OLTP performance.
+
+Resource Allocation: Ensure that sufficient resources (CPU, memory, disk I/O, etc.) are allocated to both the OLTP database and the server running the extraction job. Adjust resource allocations as needed to prevent resource contention and maintain optimal performance for both systems.
+
+Monitoring and Alerting: Implement monitoring and alerting mechanisms to track the performance of both the OLTP system and the extraction job. Set up alerts to notify you of any performance degradation or issues so that you can take proactive measures to address them.

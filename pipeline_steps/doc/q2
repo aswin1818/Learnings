@@ -1,0 +1,15 @@
+1.  Extract from OLTP (Postgres): Use AWS Glue or a custom ETL script to extract data from your OLTP database. You can perform incremental extraction by querying only the data that has been modified since the last ingestion process. This can be achieved by maintaining a timestamp or an incremental ID column in your OLTP tables and comparing it with the last ingestion timestamp or ID.
+
+2.  Transform the Data: Once you've extracted the data, apply any necessary transformations. This includes handling SCD Type 2 and Type 3 changes, filtering out unnecessary columns, aggregating data, and applying any business logic required for your OLAP analysis. Glue provides capabilities for data transformation using either Python or Spark scripts.
+
+3.  Load into Data Lake (S3): After transformation, store the processed data into your data lake in S3. You can organize the data into appropriate directories or partitions based on your schema and partitioning strategy. Storing the data in a columnar format like Parquet or ORC can help optimize query performance in Redshift.
+
+4.  Copy to Redshift: Use AWS Glue or Redshift's native COPY command to load data from S3 into your Redshift data warehouse. Redshift Spectrum can also be leveraged to query data directly from S3 without needing to load it into Redshift first, which can be useful for ad-hoc analysis or accessing historical data.
+
+5.  Update Dimension Tables: If you're using SCD Type 2 or Type 3, you'll need to update your dimension tables in Redshift accordingly. This typically involves marking existing records as inactive, inserting new records for changes, and updating any relevant references in fact tables.
+
+6.  Indexing and Optimization: Once the data is loaded into Redshift, consider creating appropriate indexes and performing vacuum and analyze operations to optimize query performance.
+
+7.  Refresh Materialized Views or Cubes (Optional): If you're using materialized views or pre-aggregated cubes for performance optimization, you may need to refresh them after the data is loaded into Redshift to ensure they reflect the latest changes.
+
+By following these steps, you can establish a daily data ingestion pipeline from your OLTP system to your OLAP system with a refresh rate of 1 day, ensuring that your analytical data is up-to-date and readily available for analysis in Redshift

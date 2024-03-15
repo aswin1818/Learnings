@@ -1,0 +1,12 @@
+OLTP System (Postgres):
+This is where your transactional data resides. It contains information about sales, products, customers, and stores.
+
+Data Lake (S3): S3 serves as a highly scalable and durable storage solution for your raw data. You can store data from various sources here, including your OLTP system, as well as any other relevant data sources.
+
+ETL Tool (AWS Glue): Glue can be used to extract data from your OLTP system, transform it as needed (e.g., handling SCD Type 2 and Type 3 changes), and load it into your data warehouse. Glue can also be used to orchestrate and schedule your ETL jobs.
+
+Data Warehouse (Redshift): Redshift is optimized for OLAP workloads and provides fast query performance for analytical queries. You can use Redshift to store your transformed data in a schema that's optimized for analytics, making it easy to query and analyze using BI tools or SQL queries.
+
+SCD Type 2 and Type 3: By implementing SCD Type 2 and Type 3 in your ETL process, you're effectively managing changes to dimensional data over time. SCD Type 2 tracks historical changes by creating new records for each change, while SCD Type 3 maintains both current and previous values in the same record, allowing for easier querying of historical data.
+
+Overall, this architecture should provide a scalable, performant, and flexible solution for building an OLAP system on AWS using Redshift, S3, Glue, and incorporating SCD Type 2 and Type 3 for managing slowly changing dimensions. Make sure to properly design your data models, ETL processes, and queries to ensure optimal performance and usability for your analytics needs.
